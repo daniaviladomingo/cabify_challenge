@@ -1,7 +1,6 @@
 package com.cabify.challenge.ui.feature.checkout
 
 import android.graphics.Paint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible

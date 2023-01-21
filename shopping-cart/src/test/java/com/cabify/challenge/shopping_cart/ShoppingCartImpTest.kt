@@ -23,7 +23,7 @@ internal class ShoppingCartImpTest {
 
         productFlow.test {
             val shoppingCartList = awaitItem()
-            val shoppingCartProduct = getShoppingCartProduct(productCode, shoppingCartList)
+            val shoppingCartProduct = findShoppingCartProduct(productCode, shoppingCartList)
             Assert.assertEquals(shoppingCartProduct?.product, productToAdd)
         }
     }
@@ -37,12 +37,12 @@ internal class ShoppingCartImpTest {
 
         productFlow.test {
             var shoppingCartList = awaitItem()
-            var shoppingCartProduct = getShoppingCartProduct(productCode, shoppingCartList)
+            var shoppingCartProduct = findShoppingCartProduct(productCode, shoppingCartList)
             Assert.assertEquals(shoppingCartProduct?.units, 1)
 
             shoppingCart.addProduct(productToAdd)
             shoppingCartList = awaitItem()
-            shoppingCartProduct = getShoppingCartProduct(productCode, shoppingCartList)
+            shoppingCartProduct = findShoppingCartProduct(productCode, shoppingCartList)
             Assert.assertEquals(shoppingCartProduct?.units, 2)
         }
     }
@@ -55,13 +55,13 @@ internal class ShoppingCartImpTest {
 
         productFlow.test {
             var shoppingCartList = awaitItem()
-            var shoppingCartProduct = getShoppingCartProduct(productCode, shoppingCartList)
+            var shoppingCartProduct = findShoppingCartProduct(productCode, shoppingCartList)
             Assert.assertEquals(shoppingCartProduct?.product, productToAdd)
 
             shoppingCart.removeProduct(productToAdd)
 
             shoppingCartList = awaitItem()
-            shoppingCartProduct = getShoppingCartProduct(productCode, shoppingCartList)
+            shoppingCartProduct = findShoppingCartProduct(productCode, shoppingCartList)
             Assert.assertEquals(shoppingCartProduct?.product, null)
         }
     }
@@ -79,7 +79,7 @@ internal class ShoppingCartImpTest {
         }
     }
 
-    private fun getShoppingCartProduct(
+    private fun findShoppingCartProduct(
         code: String,
         shoppingCartList: List<ProductShoppingCart>,
     ): ProductShoppingCart? =

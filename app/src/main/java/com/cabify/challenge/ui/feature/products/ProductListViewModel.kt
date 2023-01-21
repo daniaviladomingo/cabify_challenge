@@ -1,6 +1,5 @@
 package com.cabify.challenge.ui.feature.products
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cabify.challenge.di.annotations.UseCaseAddProductToShoppingCart
 import com.cabify.challenge.domain.interactors.base.BaseUseCase

@@ -32,11 +32,14 @@ class ShoppingCartImp : IShoppingCart {
 
     override fun getProducts(): Flow<List<ProductShoppingCart>> = callbackFlow {
         if (emitProducts == null) {
-            trySend(items.map { ProductShoppingCart(it.value, it.key) })
+            trySend(mapperToProductShoppingCartList())
         }
         emitProducts = {
-            trySend(items.map { ProductShoppingCart(it.value, it.key) })
+            trySend(mapperToProductShoppingCartList())
         }
         awaitClose { cancel() }
     }
+
+    private fun mapperToProductShoppingCartList(): List<ProductShoppingCart> =
+        items.map { ProductShoppingCart(it.value, it.key) }
 }
