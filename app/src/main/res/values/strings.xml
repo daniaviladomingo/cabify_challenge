@@ -14,4 +14,5 @@
     <string name="empty_checkout">EMPTY CHECKOUT</string>
     <string name="checkout_resume">Checkout Resume</string>
     <string name="products_buy">Products to BUY</string>
+    <string name="coming_soon">Coming Soon!!</string>
 </resources>

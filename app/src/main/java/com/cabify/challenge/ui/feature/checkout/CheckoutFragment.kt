@@ -47,7 +47,7 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>() {
                 when (uiEffect) {
                     CheckoutListContract.Effect.Error -> showError()
                     CheckoutListContract.Effect.Buy -> Toast.makeText(requireContext(),
-                        "Coming soon!!",
+                        R.string.coming_soon,
                         Toast.LENGTH_SHORT).show()
                 }
             }
