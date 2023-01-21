@@ -49,8 +49,8 @@ Examples:
 
 # Strategy
 
-I have applied CLEAN ARCHITECTURE and SOLID principles to allow this project can be easily scalable, maintainable and testable.
-I tried to keep highest cohesion between component and the lowest coupling.
+* I have applied CLEAN ARCHITECTURE and SOLID principles to allow this project can be easily scalable, maintainable and testable.
+* I tried to keep highest cohesion between component and the lowest coupling.
 
 # Architecture
 
