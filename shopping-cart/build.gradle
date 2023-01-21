@@ -1,0 +1,13 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+dependencies {
+    implementation project(':domain')
+    // Coroutines
+    implementation domainDependencies.kotlinxCoroutines
+    // Testing
+    testImplementation testingDependencies.junit
+    testImplementation testingDependencies.turbine
+    testImplementation testingDependencies.coroutinesTest
+}

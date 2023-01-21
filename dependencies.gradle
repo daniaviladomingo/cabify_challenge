@@ -1,0 +1,89 @@
+ext {
+    // Kotlin
+    kotlinVersion             = '1.7.10'
+    gradleVersion             = '7.3.0'
+    hiltAndroidGradlePlugin   = '2.42'
+
+    // Android Core
+    compileSdkV = 33
+    targetSdkV  = 33
+    minSdkV     = 21
+
+    // App Versioning
+    versionCodeMajor = 1
+    versionCodeMinor = 0
+    versionCodePatch = 0
+    versionName = "$versionCodeMajor.$versionCodeMinor.$versionCodePatch"
+
+    /**
+     Dependencies Version - App
+    */
+    // UI
+    appcompatVersion              = '1.4.2'
+    constraintlayoutVersion       = '2.1.4'
+    recyclerviewVersion           = '1.2.1'
+    materialVersion               = '1.7.0'
+    // Ktx
+    coreKtxVersion                = '1.8.0'
+    runtimeKtxVersion             = '2.5.1'
+    viewmodelKtxVersion           = '2.5.1'
+    fragmentKtxVersion            = '1.5.5'
+    // Hilt
+    hiltAndroidVersion            = '2.42'
+    hiltCompilerVersion           = '1.0.0'
+
+    /**
+     Dependencies Version - DataRemote
+     */
+    // Retrofit
+    converterGsonVersion          = '2.9.0'
+    retrofitVersion               = '2.9.0'
+    loggingInterceptorVersion     = '4.10.0'
+
+    /**
+     Dependencies Version - Domain
+     */
+    // Coroutines
+    kotlinxCoroutinesCoreVersion  = '1.6.4'
+
+    // Lifecycle
+    versionLifecycle              = "2.5.1"
+
+    /**
+     Dependencies Version - Testing
+     */
+    junitVersion                  = '4.13.2'
+    turbineVersion                = '0.7.0'
+    mockkVersion                  = '1.12.4'
+
+    appDependencies = [
+            appcompat             : "androidx.appcompat:appcompat:$appcompatVersion",
+            constraintLayout      : "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion",
+            recyclerview          : "androidx.recyclerview:recyclerview:$recyclerviewVersion",
+            runtimeKtx            : "androidx.lifecycle:lifecycle-runtime-ktx:$runtimeKtxVersion",
+            viewmodelKtx          : "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodelKtxVersion",
+            coreKtx               : "androidx.core:core-ktx:$coreKtxVersion",
+            hiltCompiler          : "androidx.hilt:hilt-compiler:$hiltCompilerVersion",
+            fragmentKtx           : "androidx.fragment:fragment-ktx:$fragmentKtxVersion",
+            material              : "com.google.android.material:material:$materialVersion",
+            hiltAndroid           : "com.google.dagger:hilt-android:$hiltAndroidVersion",
+            hiltAndroidCompiler   : "com.google.dagger:hilt-android-compiler:$hiltAndroidVersion",
+            converterGson         : "com.squareup.retrofit2:converter-gson:$converterGsonVersion",
+            loggingInterceptor    : "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion"
+    ]
+
+    dataRemoteDependencies = [
+            retrofit              : "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    ]
+
+    domainDependencies = [
+            kotlinxCoroutines     : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesCoreVersion"
+    ]
+
+    testingDependencies = [
+            junit                 : "junit:junit:$junitVersion",
+            coroutinesTest        : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinxCoroutinesCoreVersion",
+            turbine               : "app.cash.turbine:turbine:$turbineVersion",
+            mockk                 : "io.mockk:mockk:$mockkVersion"
+    ]
+}

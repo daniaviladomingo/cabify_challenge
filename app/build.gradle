@@ -1,0 +1,78 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    namespace 'com.cabify.challenge'
+    compileSdkVersion compileSdkV
+
+    defaultConfig {
+        applicationId "com.cabify.challenge"
+        minSdkVersion minSdkV
+        targetSdkVersion targetSdkV
+        versionCode versionCodeMajor * 1000 + versionCodeMinor * 100 + versionCodePatch
+        versionName "$versionCodeMajor.$versionCodeMinor.$versionCodePatch"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation project(':common')
+    implementation project(':domain')
+    implementation project(':shopping-cart')
+    implementation project(':data')
+    implementation project(':data-remote')
+
+    // UI
+    implementation appDependencies.appcompat
+    implementation appDependencies.constraintLayout
+    implementation appDependencies.recyclerview
+    implementation appDependencies.material
+
+    // Hilt
+    implementation appDependencies.hiltAndroid
+    kapt appDependencies.hiltAndroidCompiler
+    kapt appDependencies.hiltCompiler
+
+    // Ktx utils
+    implementation appDependencies.coreKtx
+    implementation appDependencies.viewmodelKtx
+    implementation appDependencies.fragmentKtx
+
+    // Retrofit
+    implementation appDependencies.converterGson
+    implementation appDependencies.loggingInterceptor
+
+    // Testing
+    testImplementation testingDependencies.junit
+    testImplementation testingDependencies.turbine
+    testImplementation testingDependencies.coroutinesTest
+    testImplementation testingDependencies.mockk
+}
