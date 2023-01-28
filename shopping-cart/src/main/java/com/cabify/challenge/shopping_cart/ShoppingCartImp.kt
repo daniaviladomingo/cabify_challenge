@@ -3,43 +3,30 @@ package com.cabify.challenge.shopping_cart
 import com.cabify.challenge.domain.model.Product
 import com.cabify.challenge.domain.model.ProductShoppingCart
 import com.cabify.challenge.domain.repository.IShoppingCart
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.map
 
 class ShoppingCartImp : IShoppingCart {
 
     // Product & Units
-    private val items = mutableMapOf<Product, Int>()
-
-    private var emitProducts: (suspend () -> Unit)? = null
+    private val items = MutableStateFlow(emptyMap<Product, Int>())
 
     override suspend fun addProduct(product: Product) {
-        items[product] = items[product]?.plus(1) ?: 1
-        emitProducts?.invoke()
+        val currentItems = items.value.toMutableMap()
+        currentItems[product] = currentItems[product]?.plus(1) ?: 1
+        items.value = currentItems
     }
 
     override suspend fun removeProduct(product: Product) {
-        items.remove(product)
-        emitProducts?.invoke()
+        val currentItems = items.value.toMutableMap()
+        items.value = currentItems.apply { remove(product) }
     }
 
     override suspend fun clear() {
-        items.clear()
-        emitProducts?.invoke()
+        items.value = emptyMap()
     }
 
-    override fun getProducts(): Flow<List<ProductShoppingCart>> = callbackFlow {
-        if (emitProducts == null) {
-            trySend(mapperToProductShoppingCartList())
-        }
-        emitProducts = {
-            trySend(mapperToProductShoppingCartList())
-        }
-        awaitClose { cancel() }
-    }
-
-    private fun mapperToProductShoppingCartList(): List<ProductShoppingCart> =
-        items.map { ProductShoppingCart(it.value, it.key) }
+    override fun getProducts(): Flow<List<ProductShoppingCart>> =
+        items.map { items.value.map { ProductShoppingCart(it.value, it.key) } }
 }
