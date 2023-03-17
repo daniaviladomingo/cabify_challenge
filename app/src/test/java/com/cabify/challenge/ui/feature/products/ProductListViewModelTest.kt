@@ -11,7 +11,7 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Before
@@ -81,7 +81,7 @@ internal class ProductListViewModelTest {
         coEvery { addProductToShoppingCartUseCase(product) } answers { Result.success(Unit) }
 
         productListViewModel.setEvent(ProductListContract.Event.OnAddProductClicked(product))
-        delay(1)
+        advanceUntilIdle()
 
         coVerify(exactly = 1) { addProductToShoppingCartUseCase(product) }
     }

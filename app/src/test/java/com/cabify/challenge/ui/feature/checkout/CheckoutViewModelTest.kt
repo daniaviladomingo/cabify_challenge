@@ -12,8 +12,8 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Before
@@ -100,7 +100,7 @@ internal class CheckoutViewModelTest {
         coEvery { removeProductFromShoppingCartUseCase(productCheckout.product) } answers { Result.success(Unit) }
 
         checkoutViewModel.setEvent(CheckoutListContract.Event.OnRemoveProductButtonClicked(productCheckout))
-        delay(1)
+        advanceUntilIdle()
 
         coVerify (exactly = 1){ removeProductFromShoppingCartUseCase(productCheckout.product) }
     }
@@ -125,7 +125,7 @@ internal class CheckoutViewModelTest {
         coEvery { clearShoppingCartUseCase(Unit) } answers { Result.success(Unit) }
 
         checkoutViewModel.setEvent(CheckoutListContract.Event.OnClearCheckoutButtonClicked)
-        delay(1)
+        advanceUntilIdle()
 
         coVerify (exactly = 1){ clearShoppingCartUseCase(Unit) }
     }
