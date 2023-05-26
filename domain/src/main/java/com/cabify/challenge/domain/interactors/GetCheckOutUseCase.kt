@@ -13,9 +13,9 @@ class GetCheckOutUseCase(
     private val checkout: ICheckout,
     dispatcher: CoroutineDispatcher,
 ) : BaseUseCaseFlow<Unit, List<ProductCheckout>>(dispatcher) {
-    override fun build(param: Unit): Flow<Result<List<ProductCheckout>>> =
+    override fun build(param: Unit): Flow<List<ProductCheckout>> =
         shoppingCart.getProducts().map { shoppingCart ->
-            Result.success(shoppingCart.map { productShoppingCart ->
+            shoppingCart.map { productShoppingCart ->
                 ProductCheckout(
                     units = productShoppingCart.units,
                     priceWithDiscount = productShoppingCart.getPrice() - checkout.calculateDiscount(
@@ -24,6 +24,6 @@ class GetCheckOutUseCase(
                     ),
                     product = productShoppingCart.product
                 )
-            })
+            }
         }
 }
